@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t izardasa/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t sanjayiz/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run izardasa/react-test npm test -- --coverage
+  - docker run sanjayiz/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t izardasa/multi-client ./client
-  - docker build -t izardasa/multi-nginx ./nginx
-  - docker build -t izardasa/multi-server ./server
-  - docker build -t izardasa/multi-worker ./worker
+  - docker build -t sanjayiz/multi-client ./client
+  - docker build -t sanjayiz/multi-nginx ./nginx
+  - docker build -t sanjayiz/multi-server ./server
+  - docker build -t sanjayiz/multi-worker ./worker
 
   #login into the docker cli
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
 
   #take those images and push them to docker hub
-  - docker push izardasa/multi-client
-  - docker push izardasa/multi-nginx
-  - docker push izardasa/multi-server
-  - docker push izardasa/multi-worker
+  - docker push sanjayiz/multi-client
+  - docker push sanjayiz/multi-nginx
+  - docker push sanjayiz/multi-server
+  - docker push sanjayiz/multi-worker
