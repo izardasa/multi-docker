@@ -15,7 +15,7 @@ after_success:
   - docker build -t sanjayiz/multi-worker ./worker
 
   #login into the docker cli
-  - docker login sanjayiz AlgoHub1987
+  - docker login -u sanjayiz -p AlgoHub1987&
 
   #take those images and push them to docker hub
   - docker push sanjayiz/multi-client
