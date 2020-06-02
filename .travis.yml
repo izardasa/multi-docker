@@ -6,7 +6,7 @@ before_install:
   - docker build -t sanjayiz/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run sanjayiz/react-test npm test -- --coverage
+  - docker run -e CI=true sanjayiz/react-test npm test 
 
 after_success:
   - docker build -t sanjayiz/multi-client ./client
@@ -15,7 +15,7 @@ after_success:
   - docker build -t sanjayiz/multi-worker ./worker
 
   #login into the docker cli
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   #take those images and push them to docker hub
   - docker push sanjayiz/multi-client
